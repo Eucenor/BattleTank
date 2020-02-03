@@ -5,10 +5,11 @@
 #include "CoreMinimal.h"
 #include "TankAimingComponent.h"
 #include "GameFramework/Pawn.h"
+#include "Tankbarrel.h"
 #include "Tank.generated.h"
 class UTankBarrel;
 class UTankTurret;
-
+class AProjectile;
 UCLASS()
 class BATTLETANK_API ATank : public APawn
 {
@@ -35,5 +36,10 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	UPROPERTY(EditAnywhere,Category=Firing)
 		float LaunchSpeed = 100000.f;
-
+	UFUNCTION(BlueprintCallable, Category = Firing)
+		void Fire();
+	UPROPERTY(EditAnywhere, Category = Setup)
+		TSubclassOf<AProjectile> ProjectileBlueprint;
+	UTankBarrel* Barrel = nullptr;
+	
 };
